@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, NavLink, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 
 import HomeView from "./views/HomeView";
@@ -7,45 +7,17 @@ import AuthorsView from "./views/AuthorsView";
 import BooksView from "./views/BooksView";
 import NotFoundView from "./views/NotFoundView";
 import BookDetailsView from "./views/BookDetailsView";
+import routes from "./routes";
+import AppBar from "./components/AppBar";
 
 const App = () => (
   <>
-    <ul>
-      <li>
-        <NavLink
-          exact
-          to="/"
-          className="NavLink"
-          activeClassName="NavLink--active"
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/authors"
-          className="NavLink"
-          activeClassName="NavLink--active"
-        >
-          Authors
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/books"
-          className="NavLink"
-          activeClassName="NavLink--active"
-        >
-          Books
-        </NavLink>
-      </li>
-    </ul>
-
+    <AppBar />
     <Switch>
-      <Route exact path="/" component={HomeView} />
-      <Route path="/authors" component={AuthorsView} />
-      <Route exact path="/books" component={BooksView} />
-      <Route path="/books/:bookId" component={BookDetailsView} />
+      <Route exact path={routes.home} component={HomeView} />
+      <Route path={routes.authors} component={AuthorsView} />
+      <Route exact path={routes.books} component={BooksView} />
+      <Route path={routes.bookDetails} component={BookDetailsView} />
       <Route component={NotFoundView} />
     </Switch>
   </>
