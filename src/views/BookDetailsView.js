@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import routes from "../routes";
 
 class BookDetailsView extends Component {
   state = {
@@ -21,15 +22,25 @@ class BookDetailsView extends Component {
     this.setState({ ...response.data });
   }
 
+  handleGoBack = () => {
+    const { location, history } = this.props;
+    history.push(location?.state?.from || routes.books);
+  };
+
   render() {
+    const { imgUrl, title, author, descr } = this.state;
+
     return (
-      <>
-        <h1>Страница одной книги {this.props.match.params.bookId}</h1>
-        <img src={this.state.imgUrl} alt={this.state.title} />
-        <h2>{this.state.title}</h2>
-        {this.state.author && <p>Автор:{this.state.author.name}</p>}
-        <p>{this.state.descr}</p>
-      </>
+      <div className="container-fluid">
+        <button type="button" onClick={this.handleGoBack}>
+          Вернуться назад
+        </button>
+
+        <img src={imgUrl} alt={title} />
+        <h2>{title}</h2>
+        {author && <p>Автор:{author.name}</p>}
+        <p>{descr}</p>
+      </div>
     );
   }
 }

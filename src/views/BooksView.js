@@ -9,7 +9,7 @@ class BooksView extends Component {
 
   async componentDidMount() {
     const response = await axios.get("http://localhost:4040/books");
-    // console.log(response.data);
+
     this.setState({ books: response.data });
   }
 

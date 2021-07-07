@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link, Route } from "react-router-dom";
-import AuthorBooks from "../components/AuthorBooks";
+import BookList from "../components/BookList/";
 
 class AuthorsView extends Component {
   state = {
@@ -34,7 +34,7 @@ class AuthorsView extends Component {
           render={(props) => {
             const bookId = Number(props.match.params.authorId);
             const author = this.state.authors.find(({ id }) => id === bookId);
-            return author && <AuthorBooks {...props} books={author.books} />;
+            return author && <BookList {...props} books={author.books} />;
           }}
         />
       </>

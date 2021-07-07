@@ -1,13 +1,21 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import BookPreview from "../BookPreview/BookPreview";
 import "./BookList.scss";
 
-const BookList = ({ books, match }) => {
+const BookList = ({ books, location }) => {
   return (
-    <ul>
-      {books.map((book) => (
-        <li key={book.id}>
-          <Link to={`${match.url}/${book.id}`}>{book.title}</Link>
+    <ul className="BookList">
+      {books.map(({ id, imgUrl, title }) => (
+        <li key={id}>
+          <Link
+            to={{
+              pathname: `/books/${id}`,
+              state: { from: location },
+            }}
+          >
+            <BookPreview imgUrl={imgUrl} title={title} />
+          </Link>
         </li>
       ))}
     </ul>
